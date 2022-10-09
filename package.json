@@ -4,7 +4,7 @@
   "main": "src/main.js",
   "scripts": {
     "test": "node src/benchmark/benchmark.js",
-    "start": "0x src/main.js"
+    "start": "src/main.js"
   },
   "keywords": [],
   "author": "",

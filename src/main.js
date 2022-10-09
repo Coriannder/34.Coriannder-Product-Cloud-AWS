@@ -83,7 +83,7 @@ let error
 
 app.use((req, res, next) => {
     const {url, method} = req
-    logger.info(`Ruta recibida: ${url} - con metodo: ${method}`)
+    //logger.info(`Ruta recibida: ${url} - con metodo: ${method}`)
     next()
 })
 app.get('/info', (req, res) => {
@@ -170,7 +170,7 @@ app.get('/error' ,  (req, res) => {
 
 app.get('*', (req, res) => {
     res.send(`Ruta: ${req.method} ${req.url} no esta implementada`)
-    logger.warn(`Ruta: ${req.method} ${req.url} no esta implementada`)
+    //logger.warn(`Ruta: ${req.method} ${req.url} no esta implementada`)
 })
 
 
@@ -198,7 +198,7 @@ io.on('connection', async (socket) => {
     socket.on('newProduct', async (newProduct) => {
         await productosDao.guardar(newProduct)
         console.log(newProduct)
-        logger.error('Error ficticio')
+        //logger.error('Error ficticio')
         io.sockets.emit('products', await productosDao.listarAll())
     })
 
