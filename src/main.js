@@ -35,10 +35,10 @@ app.use(session({
     // store: MongoStore.create({ mongoUrl: config.mongoLocal.cnxStr }),
     store: MongoStore.create(
         {
-            mongoUrl: URL_MONGO,
+            mongoUrl: process.env.URL_MONGO, //URL_MONGO,
             mongoOptions: advancedOptions
         }),
-    secret: SECRET_SESSION_MONGO,
+    secret: process.env.SECRET_SESSION_MONGO, //SECRET_SESSION_MONGO,
     resave: false,
     saveUninitialized: false,
     rolling: true,
@@ -243,8 +243,7 @@ if(mode === 'cluster'){
 
     //------------------Configuracion Server---------------------------------//
 
-    //const PORT = 8080
-    const server = httpServer.listen(port, ()=>{
+    const server = httpServer.listen(PORT, ()=>{
         console.log(`Servidor escuchando en el puerto ${server.address().port}`, `numero de cpus ${numCPUs}`)
     })
     server.on(`error`, error => console.log(`Error en servidor: ${error}`))
@@ -256,7 +255,7 @@ if(mode === 'cluster'){
     //------------------Configuracion Server---------------------------------//
  
     //const PORT = 8080
-    const server = httpServer.listen(port, ()=>{
+    const server = httpServer.listen(process.env.PORT, ()=>{
         puerto = server.address().port
         console.log(`Servidor escuchando en el puerto ${server.address().port}`, `numero de cpus ${numCPUs}`)
     })
