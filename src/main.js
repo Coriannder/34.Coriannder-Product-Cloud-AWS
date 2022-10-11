@@ -6,7 +6,7 @@ import { productosDao , mensajesDao , usuariosDao } from './daos/index.js'
 import { ContenedorMemoria } from './container/ContenedorMemoria.js'
 //import { createManyProducts } from './mocks/productosMocks.js'
 import { webAuth, apiAuth } from '../src/auth/index.js'
-//import { SECRET_SESSION_MONGO, URL_MONGO, PORT } from './config/config.js'
+import { SECRET_SESSION_MONGO, URL_MONGO, PORT } from './config/config.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import { createHash , isValidPassword } from './utils/crypt.js'
@@ -35,10 +35,10 @@ app.use(session({
     // store: MongoStore.create({ mongoUrl: config.mongoLocal.cnxStr }),
     store: MongoStore.create(
         {
-            mongoUrl: process.env.URL_MONGO, //URL_MONGO,
+            mongoUrl: URL_MONGO, //URL_MONGO,
             mongoOptions: advancedOptions
         }),
-    secret: process.env.SECRET_SESSION_MONGO, //SECRET_SESSION_MONGO,
+    secret: SECRET_SESSION_MONGO, //SECRET_SESSION_MONGO,
     resave: false,
     saveUninitialized: false,
     rolling: true,
