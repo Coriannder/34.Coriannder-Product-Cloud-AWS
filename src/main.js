@@ -28,18 +28,16 @@ app.set('views', './views')
 app.set('view engine', 'ejs')
 
 
-const urlmongo = process.env.URL_MONGO
-const secretsessionmongo = process.env.SECRET_SESSION_MONGO
 //-----------------Configuracion Session-------------------------------//
 const advancedOptions = { useNewUrlParser: true , useUnifiedTopology: true}
 app.use(session({
     // store: MongoStore.create({ mongoUrl: config.mongoLocal.cnxStr }),
     store: MongoStore.create(
         {
-            mongoUrl: urlmongo, //URL_MONGO,
+            mongoUrl: 'mongodb+srv://admin:admin456@22mocksynormalizacion.xj8iwvr.mongodb.net/test',
             mongoOptions: advancedOptions
         }),
-    secret: secretsessionmongo, //SECRET_SESSION_MONGO,
+    secret: 'shhhhhhhhhhhhhhhhhhhhh',
     resave: false,
     saveUninitialized: false,
     rolling: true,
