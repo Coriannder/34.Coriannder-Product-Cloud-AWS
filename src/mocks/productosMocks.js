@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+/* import { faker } from '@faker-js/faker';
 
 faker.locale = 'es'
 
@@ -48,7 +48,7 @@ const createMesagge = () => {
 
         text: faker.lorem.words(15),
     }
-}
+} */
 
 
 

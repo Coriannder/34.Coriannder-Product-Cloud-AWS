@@ -4,9 +4,9 @@ import { Server as HttpServer }  from 'http'
 import { Server as IOServer } from 'socket.io'
 import { productosDao , mensajesDao , usuariosDao } from './daos/index.js'
 import { ContenedorMemoria } from './container/ContenedorMemoria.js'
-import { createManyProducts } from './mocks/productosMocks.js'
+//import { createManyProducts } from './mocks/productosMocks.js'
 import { webAuth, apiAuth } from '../src/auth/index.js'
-import { SECRET_SESSION_MONGO, URL_MONGO, PORT } from './config/config.js'
+//import { SECRET_SESSION_MONGO, URL_MONGO, PORT } from './config/config.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import { createHash , isValidPassword } from './utils/crypt.js'
@@ -180,10 +180,10 @@ await mensajesDao.borrarTodo()                           // Borro los mensajes g
 await productosDao.borrarTodo();                         // Booro los productos guardados en mongoDB
 
 
-const prod = createManyProducts(5)                       // Mockeo 5 productos
+/* const prod = createManyProducts(5)                       // Mockeo 5 productos
 prod.forEach(elem => {
     productosDao.guardar(elem)
-})
+}) */
 
 //--------------------------Websockets----------------------------//
 
@@ -214,18 +214,23 @@ io.on('connection', async (socket) => {
 //------------------YARGS---------------------------------//
 import yargs from  'yargs'
 
-const { port, mode } = yargs(process.argv.slice(2))
+const { /* port, */ mode } = yargs(process.argv.slice(2))
     .alias({
-        p: 'port',
+        //p: 'port',
         m: 'mode'
     })
     .default({
-        port: PORT,
+        //port: 8086,
         mode: 'fork'
     })
     .argv
 
 //------------------------------------------------------------------//
+
+
+import dotenv from 'dotenv'
+dotenv.config()
+let port = process.env.PORT || 8080
 
 if(mode === 'cluster'){
     if (cluster.isPrimary) {
@@ -242,8 +247,10 @@ if(mode === 'cluster'){
     } else {
 
     //------------------Configuracion Server---------------------------------//
+    
+    
 
-    const server = httpServer.listen(PORT, ()=>{
+    const server = httpServer.listen(port, ()=>{
         console.log(`Servidor escuchando en el puerto ${server.address().port}`, `numero de cpus ${numCPUs}`)
     })
     server.on(`error`, error => console.log(`Error en servidor: ${error}`))
